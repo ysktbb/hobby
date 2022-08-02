@@ -28,7 +28,7 @@ function clickImg(obj) {
   let options = new Array("", "武器", "鎧", "盾", "兜", "アクセサリ", "道具", "その他");//0:"", 1:"武器", 2:"鎧", 3:"盾", 4:"兜", 5:"アクセサリ", 6:"道具", 7:"その他"
   let kinds = "";
   for (let l in options) {
-    kinds += "<div style=\"width: 150px; height: 40px; border-style: solid; border-width: 0px 1px 1px 1px; border-color: #888888; font-size: 24px; padding: 0px;\" onclick=\"selectKind('" + l + "');\">" + options[l] + "</div>";
+    kinds += "<div style=\"width: 200px; height: 60px; border-style: solid; border-width: 0px 1px 1px 1px; border-color: #888888; font-size: 24px; padding: 0px;\" onclick=\"selectKind('" + l + "');\">" + options[l] + "</div>";
   }
   let panel = document.getElementById("selectPanel");
   panel.innerHTML = kinds;
