@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<title>ラッキーパネル</title>
+<meta name="viewport" content="width=427">
+<style>
+</style>
+<script>
+let targetObj;
+let weapon = 12;
+let armor = 11;
+let shield = 4;
+let helmet = 5;
+let accessory = 0;
+let tool = 5;
+let others = 3;
+function bodyOnload() {
+}
+function init() {
+  let panel = document.getElementsByName("imgPanel");
+  for (let i = 0; i < panel.length; i++) {
+    panel[i].src = "images/0.png";
+  }
+}
+function clickImg(obj) {
+  targetObj = obj;
+  let options = new Array("", "武器", "鎧", "盾", "兜", "アクセサリ", "道具", "その他");//0:"", 1:"武器", 2:"鎧", 3:"盾", 4:"兜", 5:"アクセサリ", 6:"道具", 7:"その他"
+  let kinds = "";
+  for (let l in options) {
+    kinds += "<div style=\"width: 80px; height: 16px; border-style: solid; border-width: 0px 1px 1px 1px; border-color: #888888; font-size: 11px; padding: 0px;\" onclick=\"selectKind('" + l + "');\">" + options[l] + "</div>";
+  }
+  let panel = document.getElementById("selectPanel");
+  panel.innerHTML = kinds;
+  panel.style.display = "block";
+  panel.style.top = Math.trunc(targetObj.getBoundingClientRect().top) + "px";
+  panel.style.left = Math.trunc(targetObj.getBoundingClientRect().left) + "px";
+}
+function selectKind(kind) {
+  let panel = document.getElementById("selectPanel");
+  switch (kind) {
+    case "0":
+      panel.style.display = "none";
+      break;
+    default:
+      let len = -1;
+      let html = "";
+      switch (kind) {
+        case "1":
+          len = weapon;
+          break;
+        case "2":
+          len = armor;
+          break;
+        case "3":
+          len = shield;
+          break;
+        case "4":
+          len = helmet;
+          break;
+        case "5":
+          len = accessory;
+          break;
+        case "6":
+          len = tool;
+          break;
+        case "7":
+          len = others;
+          break;
+      }
+      for (let i = 0; i <= len; i++) {
+        html += "<img name=\"" + kind + "-" + i + "\" title=\"" + kind + "-" + i + "\" src=\"images/" + kind + "-" + i + ".png\" style=\"width: 50px; height: 50px;\" onclick=\"selectImg('" + kind + "-" + i + ".png');\">"
+      }
+      panel.style.left = "7px";
+      panel.innerHTML = html;
+      break;
+  }
+}
+function selectImg(png) {
+  targetObj.src = "images/" + png
+  document.getElementById("selectPanel").style.display = "none";
+}
+</script>
+</head>
+<body style="margin: 0px;" onload="bodyOnload();">
+<br>
+<table style="border: 1px solid #AAAAAA;">
+  <tr>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+  </tr>
+  <tr>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+  </tr>
+  <tr>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+  </tr>
+  <tr>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+    </td>
+  </tr>
+</table>
+<input type="button" value="初期化" onclick="init();">
+<div id="selectPanel" style="display: none; position: absolute; top: 0px; left: 0px; background-color: #FFFFFF; border-top: solid 1px #888888;">
+</div>
+</body>
+</html>
