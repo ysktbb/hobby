@@ -7,7 +7,8 @@
 <style>
 </style>
 <script>
-let targetObj;
+let targetObject;
+let targetImage;
 let weapon;
 let armor;
 let shield;
@@ -16,69 +17,73 @@ let accessory;
 let tool;
 let others;
 function bodyOnload() {
+  init();
   changeSite();
 }
 function changeSite() {
- switch (document.getElementById("site").value) {
-  case "1":
-    weapon = 14;
-    armor = 11;
-    shield = 4;
-    helmet = 7;
-    accessory = 0;
-    tool = 7;
-    others = 3;
-    break;
-  case "2":
-    weapon = 22;
-    armor = 20;
-    shield = 6;
-    helmet = 7;
-    accessory = 9;
-    tool = 10;
-    others = 4;
-    break;
-  case "3":
-    weapon = 25;
-    armor = 22;
-    shield = 6;
-    helmet = 7;
-    accessory = 9;
-    tool = 11;
-    others = 4;
-    break;
-  case "4":
-    weapon = 32;
-    armor = 26;
-    shield = 10;
-    helmet = 11;
-    accessory = 11;
-    tool = 14;
-    others = 4;
-    break;
-  case "5":
-    weapon = 35;
-    armor = 26;
-    shield = 10;
-    helmet = 11;
-    accessory = 11;
-    tool = 16;
-    others = 4;
-    break;
- }
+  switch (document.getElementById("site").value) {
+    case "1":
+      weapon = [0, 1, 2, 3, 4, 5, 6, 14, 15, 16, 17, 18, 19, 27];
+      armor = [0, 1, 4, 5, 6, 12, 15, 16, 18, 19, 22];
+      shield = [0, 1, 2, 3];
+      helmet = [0, 1, 2, 4, 7, 8, 9];
+      accessory = [];
+      tool = [1, 2, 3, 4, 6, 7, 8];
+      others = 3;
+      others = [0, 2, 3];
+      break;
+    case "2":
+      weapon = [0, 1, 2, 3, 4, 5, 6, 8, 9, 14, 15, 16, 17, 18, 19, 20, 21, 22, 25, 27, 28, 29, 30];
+      armor = [0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+      shield = [0, 1, 2, 3, 4, 5];
+      helmet = [0, 1, 2, 3, 4, 7, 8, 9];
+      accessory = [0, 1, 2, 3, 4, 5, 6, 8];
+      tool = [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18];
+      others = [0, 2, 3];
+      break;
+    case "3":
+      weapon = 25;
+      armor = 22;
+      shield = 6;
+      helmet = 7;
+      accessory = 9;
+      tool = 11;
+      others = 4;
+      break;
+    case "4":
+      weapon = 32;
+      armor = 26;
+      shield = 10;
+      helmet = 11;
+      accessory = 11;
+      tool = 14;
+      others = 4;
+      break;
+    case "5":
+      weapon = 35;
+      armor = 26;
+      shield = 10;
+      helmet = 11;
+      accessory = 11;
+      tool = 16;
+      others = 4;
+      break;
+  }
 }
 function init() {
-  let panel = document.getElementsByName("imgPanel");
-  for (let i = 0; i < panel.length; i++) {
-    panel[i].src = "images/0.png";
+  let canvas = document.getElementsByName("canvas");
+  for (let i = 0; i < canvas.length; i++) {
+    let ctx = canvas[i].getContext("2d");
+    let image = document.getElementById("slime");
+    ctx.drawImage(image, -1, -1);
   }
 }
 function clickImg(obj) {
-  targetObj = obj;
+  targetObject = obj;
   let options = new Array("", "武器", "鎧", "盾", "兜", "アクセサリ", "道具", "その他");//0:"", 1:"武器", 2:"鎧", 3:"盾", 4:"兜", 5:"アクセサリ", 6:"道具", 7:"その他"
   let kinds = "";
   for (let l in options) {
-    kinds += "<div style=\"width: 150px; height: 40px; border-style: solid; border-width: 0px 1px 1px 1px; border-color: #888888; font-size: 24px; padding: 0px;\" onclick=\"selectKind('" + l + "');\">" + options[l] + "</div>";
+    kinds += "<div style=\"width: 180px; height: 40px; border-style: solid; border-width: 0px 1px 1px 1px; border-color: #888888; font-size: 32px; padding: 0px;\" onclick=\"selectKind('" + l + "');\">" + options[l] + "</div>";
   }
   let panel = document.getElementById("selectPanel");
   panel.innerHTML = kinds;
@@ -91,47 +96,63 @@ function selectKind(kind) {
       panel.style.display = "none";
       break;
     default:
-      let len = -1;
+      let array;
       let html = "";
       switch (kind) {
         case "1":
-          len = weapon;
+          array = weapon;
+          targetImage = "weapon";
           break;
         case "2":
-          len = armor;
+          array = armor;
+          targetImage = "armor";
           break;
         case "3":
-          len = shield;
+          array = shield;
+          targetImage = "shield";
           break;
         case "4":
-          len = helmet;
+          array = helmet;
+          targetImage = "helmet";
           break;
         case "5":
-          len = accessory;
+          array = accessory;
+          targetImage = "accessory";
           break;
         case "6":
-          len = tool;
+          array = tool.length;
+          targetImage = "tool";
           break;
         case "7":
-          len = others;
+          array = others;
+          targetImage = "others";
           break;
       }
-      for (let i = 0; i <= len; i++) {
-        html += "<img name=\"" + kind + "-" + i + "\" title=\"" + kind + "-" + i + "\" src=\"images/" + kind + "-" + i + ".png\" style=\"width: 50px; height: 50px;\" onclick=\"selectImg('" + kind + "-" + i + ".png');\">"
+      for (let i = 0; i < array.length; i++) {
+        html += "<canvas name=\"selectCanvas\" width=\"60\" height=\"60\" onclick=\"selectImg(" + array[i] + ");\"></canvas>";
       }
       panel.style.left = "7px";
       panel.innerHTML = html;
+      for (let i = 0; i < array.length; i++) {
+        let canvas = document.getElementsByName("selectCanvas")[i];
+        let ctx = canvas.getContext("2d");
+        let image = document.getElementById(targetImage);
+        ctx.scale(0.8, 0.8);
+        ctx.drawImage(image, (-76 * array[i]) - 1, -1);
+      }
       break;
   }
 }
-function selectImg(png) {
-  targetObj.src = "images/" + png
+function selectImg(index) {
+  let ctx = targetObject.getContext("2d");
+  let image = document.getElementById(targetImage);
+  ctx.drawImage(image, (-76 * index) - 1, -1);
   document.getElementById("selectPanel").style.display = "none";
 }
 </script>
 </head>
 <body style="margin: 0px;" onload="bodyOnload();">
-<select id="site" onchange="changeSite();">
+<select name="site" id="site" title="site" onchange="changeSite();">
   <option value="1">旅の宿(過去)</option>
   <option value="2" selected>旅の宿(現代)</option>
   <option value="3">コスタール1階</option>
@@ -142,75 +163,83 @@ function selectImg(png) {
 <table style="border: 1px solid #AAAAAA;">
   <tr>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
-    </td>
-  </tr>
-  <tr>
-    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
-    </td>
-    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
-    </td>
-    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
-    </td>
-    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
-    </td>
-    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
   </tr>
   <tr>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
   </tr>
   <tr>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
     <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
-      <img name="imgPanel" title="imgPanel" src="images/0.png" onclick="clickImg(this);">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
+    </td>
+  </tr>
+  <tr>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
+    </td>
+    <td style="width: 90px; height: 90px; padding: 0px; text-align: center;">
+      <canvas name="canvas" id="canvas" width="75" height="75" onclick="clickImg(this);"></canvas>
     </td>
   </tr>
 </table>
 <input type="button" value="初期化" onclick="init();">
 <div id="selectPanel" style="display: none; position: absolute; top: 31px; left: 6px; background-color: #FFFFFF; border-top: solid 1px #888888;">
 </div>
+<img name="slime" title="slime" src="images/slime.png" id="slime" style="display: none;">
+<img name="weapon" title="weapon" src="images/weapon.png" id="weapon" style="display: none;">
+<img name="armor" title="armor" src="images/armor.png" id="armor" style="display: none;">
+<img name="shield" title="shield" src="images/shield.png" id="shield" style="display: none;">
+<img name="helmet" title="helmet" src="images/helmet.png" id="helmet" style="display: none;">
+<img name="accessory" title="accessory" src="images/accessory.png" id="accessory" style="display: none;">
+<img name="tool" title="tool" src="images/tool.png" id="tool" style="display: none;">
+<img name="others" title="others" src="images/others.png" id="others" style="display: none;">
 </body>
 </html>
