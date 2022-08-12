@@ -37,36 +37,27 @@ function changeSite() {
       armor = [0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
       shield = [0, 1, 2, 3, 4, 5];
       helmet = [0, 1, 2, 3, 4, 7, 8, 9];
-      accessory = [0, 1, 2, 3, 4, 5, 6, 8];
+      accessory = [0, 1, 2, 3, 4, 7, 8, 9];
       tool = [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18];
       others = [0, 2, 3];
       break;
     case "3":
-      weapon = 25;
-      armor = 22;
-      shield = 6;
-      helmet = 7;
-      accessory = 9;
-      tool = 11;
-      others = 4;
+      weapon = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 27, 28, 29, 30];
+      armor = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+      shield = [0, 1, 2, 3, 4, 5];
+      helmet = [0, 1, 2, 3, 4, 7, 8, 9];
+      accessory = [0, 1, 2, 3, 4, 7, 8, 9];
+      tool = [0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 16, 17, 18];
+      others = [0, 2, 3];
       break;
     case "4":
-      weapon = 32;
-      armor = 26;
-      shield = 10;
-      helmet = 11;
-      accessory = 11;
-      tool = 14;
-      others = 4;
-      break;
-    case "5":
-      weapon = 35;
-      armor = 26;
-      shield = 10;
-      helmet = 11;
-      accessory = 11;
-      tool = 16;
-      others = 4;
+      weapon = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 27, 28, 29, 30, 31, 32, 33, 34];
+      armor = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27];
+      shield = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+      helmet = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+      accessory = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+      tool = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+      others = [0, 1, 2, 3];
       break;
   }
 }
@@ -83,7 +74,7 @@ function clickImg(obj) {
   let options = new Array("", "武器", "鎧", "盾", "兜", "アクセサリ", "道具", "その他");//0:"", 1:"武器", 2:"鎧", 3:"盾", 4:"兜", 5:"アクセサリ", 6:"道具", 7:"その他"
   let kinds = "";
   for (let l in options) {
-    kinds += "<div style=\"width: 180px; height: 40px; border-style: solid; border-width: 0px 1px 1px 1px; border-color: #888888; font-size: 32px; padding: 0px;\" onclick=\"selectKind('" + l + "');\">" + options[l] + "</div>";
+    kinds += "<div style=\"width: 180px; height: 50px; border-style: solid; border-width: 0px 1px 1px 1px; border-color: #888888; font-size: 32px; padding: 0px;\" onclick=\"selectKind('" + l + "');\">" + options[l] + "</div>";
   }
   let panel = document.getElementById("selectPanel");
   panel.innerHTML = kinds;
@@ -155,9 +146,8 @@ function selectImg(index) {
 <select name="site" id="site" title="site" onchange="changeSite();">
   <option value="1">旅の宿(過去)</option>
   <option value="2" selected>旅の宿(現代)</option>
-  <option value="3">コスタール1階</option>
-  <option value="4">コスタール2階</option>
-  <option value="5">移民の町</option>
+  <option value="3">コスタール</option>
+  <option value="4">移民の町</option>
 </select>
 <br>
 <table style="border: 1px solid #AAAAAA;">
